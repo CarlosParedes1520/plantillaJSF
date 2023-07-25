@@ -7,7 +7,7 @@ package ec.tws2.contfiables.service;
 import ec.tws2.tcs.contfiables.model.Cliente;
 import ec.tws2.contfiables.enviroments.Enviroments;
 import ec.tws2.tcs.contfiables.model.FileSignature;
-import ec.tws2.tcs.contfiables.model.IDTipoIdentificacion;
+
 import org.primefaces.shaded.json.JSONException;
 import org.primefaces.shaded.json.JSONObject;
 import org.springframework.http.HttpEntity;

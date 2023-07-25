@@ -8,8 +8,7 @@ package ec.tws2.contfiables.service;
  *
  * @author juanc
  */
-import ec.tws2.tcs.contfiables.model.IDTarifaIva;
-import ec.tws2.tcs.contfiables.model.Producto;
+
 import java.util.List;
 import org.primefaces.shaded.json.JSONObject;
 import org.springframework.core.ParameterizedTypeReference;
@@ -82,50 +81,4 @@ public class SpringRestConsumer {
         return responseBody;
 
     }
-
-    // -------- rest de productos--------
-    
-    
-    public Producto obtenerProducto(String valor) {
-        restTemplate = new RestTemplate();
-        String url = serverCrud + "/productos/producto";
-        MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
-        parameters.add("idProducto", valor);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(parameters, headers);
-        ResponseEntity<Producto> response = restTemplate.exchange(url, HttpMethod.POST, requestEntity, new ParameterizedTypeReference<Producto>() {
-        });
-        Producto responseBody = response.getBody();
-        return responseBody;
-    }
-
-    public List<IDTarifaIva> obtenerListaIva() {
-        restTemplate = new RestTemplate();
-        String url = serverCrud + "/productos/listaIva";
-        MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(parameters, headers);
-        ResponseEntity<List<IDTarifaIva>> response = restTemplate.exchange(url, HttpMethod.POST, requestEntity, new ParameterizedTypeReference<List<IDTarifaIva>>() {
-        });
-        List<IDTarifaIva> responseBody = response.getBody();
-        return responseBody;
-    }
-
-    public List<Producto> obtenerListaProductos() {
-        restTemplate = new RestTemplate();
-        String url = serverCrud + "/productos/list";
-        MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
-        parameters.add("idCliente", "91");
-        parameters.add("idProducto", "0");
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(parameters, headers);
-        ResponseEntity<List<Producto>> response = restTemplate.exchange(url, HttpMethod.POST, requestEntity, new ParameterizedTypeReference<List<Producto>>() {
-        });
-        List<Producto> responseBody = response.getBody();
-        return responseBody;
-    }
-
 }

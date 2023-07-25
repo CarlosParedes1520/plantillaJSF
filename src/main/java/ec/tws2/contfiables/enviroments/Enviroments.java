@@ -9,5 +9,5 @@ package ec.tws2.contfiables.enviroments;
  * @author marcatoma
  */
 public interface Enviroments {
-    final String SERVER="http://192.168.1.4:7555";
+    final String SERVER = "http://192.168.1.3:7555";
 }

@@ -14,7 +14,7 @@ public class Cliente {
     private String clave;
     private String ciudad;
     private String telefono;
-    private IDTipoIdentificacion tipo;
+
     private String emailCliente;
     private String user;
     private String archivoFirma;
@@ -96,13 +96,6 @@ public class Cliente {
         this.telefono = telefono;
     }
 
-    public IDTipoIdentificacion getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(IDTipoIdentificacion tipo) {
-        this.tipo = tipo;
-    }
 
     public String getEmailCliente() {
         return emailCliente;
