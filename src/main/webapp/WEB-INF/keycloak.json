@@ -1,0 +1,8 @@
+{
+  "realm": "contfiables",
+  "auth-server-url": "https://testlogin.tws2.io/auth/",
+  "ssl-required": "none",
+  "resource": "logueoBack",
+  "public-client": true,
+  "confidential-port": 0
+}

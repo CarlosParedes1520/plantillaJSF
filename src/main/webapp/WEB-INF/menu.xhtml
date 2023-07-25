@@ -1,0 +1,101 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pr="http://primefaces.org/rain">
+
+    <div class="menu-wrapper">
+        <div class="layout-menu-container">
+            <ui:fragment rendered="#{guestPreferences.profileMode == 'popup' ? false : true}">
+                <div class="layout-profile">
+                    <a class="layout-profile-button" href="#">
+                        <span class="image-name">
+                            <p:graphicImage name="images/avatar-profilemenu.png" library="rain-layout" />
+                            <span class="layout-profile-userinfo">
+                                <span class="layout-profile-name">Jordi Santiago</span>
+                                <span class="layout-profile-mail">jordi@primetek.com.tr</span>
+                            </span>
+                        </span>
+                        <i class="layout-profile-icon pi pi-chevron-down"/>
+                    </a>
+                    <ul class="layout-profile-menu">
+                        <li>
+                            <a href="#">
+                                <i class="pi pi-user"/>
+                                <span>Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="pi pi-cog"/>
+                                <span>Settings</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="pi pi-envelope"/>
+                                <span>Messages</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="pi pi-bell"/>
+                                <span>Notifications</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </ui:fragment>
+            <h:form id="menuform">
+                <pr:menu widgetVar="RainMenuWidget">
+                    <p:submenu id="om_homepage" label="Principal" icon="pi pi-home">   
+                        <p:menuitem id="om_perfil" value="Perfil" icon="pi pi-home" outcome="/pages/usuarios/actualizar_usuario" />
+                        <p:menuitem id="om_facturacion_dash" value="Principal" icon="pi pi-home" outcome="/pages/home" />
+                        <p:menuitem id="om_productos" value="Productos" icon="pi pi-shopping-cart" outcome="/pages/productos" />
+                        <p:submenu id="om_facturacion" label="Facturación" icon="pi pi-shopping-bag">
+                            <p:menuitem id="om_factura" value="Facturar" icon="pi pi-file" outcome="/pages/facturacion_principal" />
+                            <p:menuitem id="om_buscar_factura" value="Buscar Factura" icon="pi pi-search" outcome="/pages/buscar_factura" />
+                        </p:submenu>
+                        <p:submenu id="om_contabilidadpage" label="Contabilidad" icon="pi pi-home">    
+                            <p:submenu id="om_contabilidad" label="Mantenimientos" icon="pi pi-shopping-bag">
+                                <p:menuitem id="om_contabilidad_cuentascontables" value="Cuentas contables" icon="pi pi-file" outcome="/pages/contabilidad/mantenimientos/cuentas_contables" />
+                            </p:submenu>
+                        </p:submenu>
+                    </p:submenu>
+
+                    <p:submenu id="om_components" label="UI Kit" icon="pi pi-star-fill" rendered="false">
+                        <p:menuitem id="om_formlayout" value="Form Layout" icon="pi pi-id-card" outcome="/formlayout" />
+                        <p:menuitem id="om_input" value="Input" icon="pi pi-check-square" outcome="/input" />
+                    </p:submenu>               
+                    <p:submenu id="om_hierarchy" label="Hierarchy" icon="pi pi-align-left" rendered="false">
+                        <p:submenu id="om_sm1" label="Submenu 1" icon="pi pi-align-left">
+                            <p:submenu id="om_sm11" label="Submenu 1.1" icon="pi pi-align-left">
+                                <p:menuitem id="om_lnk111" value="Link 1.1.1" icon="pi pi-align-left" url="#" />
+                                <p:menuitem id="om_lnk112" value="Link 1.1.2" icon="pi pi-align-left" url="#" />
+                                <p:menuitem id="om_lnk113" value="Link 1.1.3" icon="pi pi-align-left" url="#" />
+                            </p:submenu>
+                            <p:submenu id="om_sm12" label="Submenu 1.2" icon="pi pi-align-left">
+                                <p:menuitem id="om_lnk121" value="Link 1.2.1" icon="pi pi-align-left" url="#" />
+                            </p:submenu>
+                        </p:submenu>
+                        <p:submenu id="om_sm2" label="Submenu 2" icon="pi pi-align-left" rendered="false">
+                            <p:submenu id="om_sm21" label="Submenu 2.1" icon="pi pi-align-left">
+                                <p:menuitem id="om_lnk211" value="Link 2.1.1" icon="pi pi-align-left" url="#" />
+                                <p:menuitem id="om_lnk212" value="Link 2.1.2" icon="pi pi-align-left" url="#" />
+                            </p:submenu>
+                            <p:submenu id="om_sm22" label="Submenu 2.2" icon="pi pi-align-left">
+                                <p:menuitem id="om_lnk221" value="Link 2.2.1" icon="pi pi-align-left" url="#" />
+                            </p:submenu>
+                        </p:submenu>
+                    </p:submenu>
+                    <p:submenu id="om_getstarted" label="Start" icon="pi pi-download" rendered="false">
+                        <p:menuitem id="om_buy" value="Buy Now" icon="pi pi-shopping-cart" url="https://www.primefaces.org/store" />
+                        <p:menuitem id="om_doc" value="Documentation" icon="pi pi-info-circle" outcome="/documentation"/>
+                    </p:submenu>
+                </pr:menu>
+            </h:form>
+        </div>
+    </div>
+
+</ui:composition>

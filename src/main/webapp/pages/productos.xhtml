@@ -1,0 +1,79 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Productos y Servicios</ui:define>
+
+    <ui:define name="viewname">
+        <li>Contfiables</li>
+        <li><i class="pi pi-chevron-right"></i></li>
+        <li>
+            <p:link outcome="/pages/productos">Productos y Servicios</p:link>
+        </li>
+    </ui:define>
+
+    <ui:define name="content">
+
+        <h:form>
+            <div class="p-grid">
+                <div class="p-col-12">
+                    <div class="card">
+                        <h5>Formulario</h5>
+                        <div class="ui-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-12 p-md-12">
+                                <div class="p-field p-col-12 p-md-6">
+                                    <p:outputLabel for="prod" class="p-field p-col-12 p-md-12" value="Seleccionar Producto" />
+                                    <p:selectOneMenu id="prod" value="#{productosController.productoSeleccionado.id}" style="width: 32%;">
+                                        <f:selectItem itemLabel="Seleccione" itemValue=""  />
+                                        <!--<f:selectItems value="No hay elementos disponibles." rendered="# { empty productosController.countries}" />-->
+                                        <f:selectItems value="#{productosController.productosLista}" var="producto"
+                                                       itemValue="#{producto.id}" itemLabel="#{producto.nombreProducto}" />
+                                        <p:ajax event="change" process="@this" listener="#{productosController.valueChangedListener()}"
+                                                update="codigo nombre precio ivaT detalle" />
+                                    </p:selectOneMenu>
+
+
+
+                                </div> 
+                                <div class="p-field p-col-12 p-md-4">
+                                    <p:outputLabel  for= "codigo" value="Codigo del Producto" />
+                                    <p:inputText id="codigo" value="#{productosController.producto.codigo}"/>
+                                </div>
+                                <div class="ui-fluid p-formgrid p-grid" style="margin: 0">
+                                    <div class="p-field p-col-12 p-md-4">
+                                        <p:outputLabel for="nombre" value="Nombre de Producto" />
+                                        <p:inputText id="nombre" value="#{productosController.producto.nombreProducto}"/>
+                                    </div> 
+                                    <div class="p-field p-col-12 p-md-4">
+                                        <p:outputLabel for="precio" value="Precio Unitario" />
+                                        <p:inputText id="precio" value="#{productosController.producto.precioUnitario}" />
+                                    </div>
+                                    <div class="p-field p-col-12 p-md-4">
+                                        <p:outputLabel value="Seleccionar IVA" class="p-field p-col-12 p-md-12" />
+                                        <p:selectOneMenu id="ivaT" value="#{productosController.iva.idTarifaIva}" >
+                                            <f:selectItem itemLabel="Seleccione" itemValue=""  />
+                                            <f:selectItems value="#{productosController.ivaTarifa}" var="iva"
+                                                           itemValue="#{iva.idTarifaIva}" itemLabel="#{iva.descripcion}" />
+                                        </p:selectOneMenu>
+                                    </div>
+                                </div>
+                                <div class="p-field p-col-12 p-md-4">
+                                    <p:outputLabel for="detalle" value="Información adicional" />
+                                    <p:inputTextarea id="detalle" rows="4" value="#{productosController.producto.informacionAdicional}" />
+                                </div>
+                                <div class="p-field p-col-12 p-md-12" style="display: flex; align-content: center; justify-content: center">
+                                    <p:commandButton action="#{productosController.guardarProducto}"  update="@form" title="Save" value="Guardar / Modificar" icon="pi pi-save" style="width: 15%" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+
+
+    </ui:define>
+</ui:composition>

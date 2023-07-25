@@ -1,0 +1,78 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Principal</ui:define>
+
+    <ui:define name="viewname">
+        <li>Contfiables</li>
+        <li><i class="pi pi-chevron-right"></i></li>
+        <li>
+            <p:link outcome="/pages/home">Principal</p:link>
+        </li>
+    </ui:define>
+    <ui:define name="content">
+        <script>
+            function mostrarImagen(event) {
+                var archivo = event.target.files[0];
+                var lector = new FileReader();
+                lector.onload = function (e) {
+                    var imagen = document.getElementById("imagen");
+                    imagen.src = e.target.result;
+                };
+                lector.readAsDataURL(archivo);
+            }
+        </script>
+        <div class="p-grid" onload="#{userSession.mantenerDialogoEnRecarga()}">
+            <div class="p-col">
+                <div class="card">
+                    <h1>Bienvenido #{userSession.userLogin.name}</h1>
+                    <p>Aplicativo Contfiables powered by TWS2.</p>                  
+                </div>
+            </div>
+        </div>
+        <p:dialog id="dialog" header="Datos Adicionales" widgetVar="dlg3" width="40%" style="overflow: auto; max-height: 700px;" closable="false" modal="true" dynamic="true" appendTo="@(body)">  
+            <h:form enctype="multipart/form-data">
+                <p:messages  showDetail="true" widgetVar="messageWidget" closable="true"  globalOnly="true" >
+                    <p:autoUpdate/>
+                </p:messages>
+                <h:outputText value="Datos Personales"/>
+                <p:panelGrid columns="1" style="width: 100%; justify-content: center; align-items: center; display: flex" >
+                    <img id="imagen" src="data:image/png;base64,#{registroController.cliente.logo}" alt="Imagen cargada" width="335" height="168" />
+                    <h:inputFile   id="fileInput" rendered="true" value="#{registroController.logoFile}" onchange="mostrarImagen(event)" />
+                </p:panelGrid>
+                <p:panelGrid columns="2" style="width: 100%">
+                    <p:outputLabel for="identificacion" value="Identificación:" />
+                    <p:inputText rendered="true"  id="identificacion" value="#{registroController.cliente.identification}"  style="width: 100%" />
+                    <p:outputLabel rendered="true"  for="nombres" value="Nombres:" />
+                    <p:inputText id="nombres" value="#{registroController.cliente.nombres}"  style="width: 100%"/>
+                    <p:outputLabel rendered="true"  for="apellidos" value="Apellidos:" />
+                    <p:inputText id="apellidos" value="#{registroController.cliente.apellidos}"  style="width: 100%" />
+                    <p:outputLabel rendered="true"  for="ciudad" value="Ciudad:" />
+                    <p:selectOneMenu rendered="true"  id="ciudad" value="#{registroController.cliente.ciudad}"  style="width: 100%">
+                        <f:selectItem itemLabel="Seleccionar" itemValue="" noSelectionOption="true"/>
+                        <f:selectItems value="#{registroController.ciudades}" itemLabel="#{registroController.ciudades}" />
+                    </p:selectOneMenu>
+                    <p:outputLabel for="telefono" value="Teléfono:" />
+                    <p:inputText rendered="true"  id="telefono" value="#{registroController.cliente.telefono}"  style="width: 100%"/>
+                </p:panelGrid>
+                <h:outputText value="Datos Firma Electrónica"/>
+                <p:panelGrid columns="2">
+                    <p:outputLabel for="clave_firma" value="Clave Firma:" />
+                    <p:inputText rendered="true"  id="clave_firma" value="#{registroController.cliente.claveFirma}"  style="width: 100%" />
+                    <p:outputLabel for="archivo_firma" value="Archivo Firma:" />
+                    <h:inputFile rendered="true"  id="archivo_firma" value="#{registroController.firmaFile}" />
+                    <f:facet name="footer">     
+                        <p:commandButton icon="pi pi-send" ajax="true" value="Enviar" action="#{registroController.registrarUsuario()}" style="margin-right: .5rem"/>
+                        <p:commandButton icon="pi pi-times" id="btnCancelar" actionListener="#{menuBar.logout()}" value="Cancelar"  style="margin-rigrht: .5rem" action="empty?faces-redirect=true"></p:commandButton>
+                    </f:facet>
+                </p:panelGrid>
+            </h:form>
+        </p:dialog> 
+
+    </ui:define>
+
+</ui:composition>

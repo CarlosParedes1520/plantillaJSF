@@ -1,0 +1,144 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Configuracion de Cuenta</ui:define>
+
+
+    <ui:define name="viewname">
+        <li>Configuracion de Cuenta</li>
+        <li><i class="pi pi-chevron-right"></i></li>
+        <li>
+            <p:link outcome="/pages/usuarios/actualizar_usuario">Datos Personales</p:link>
+        </li>
+    </ui:define>
+
+
+
+    <ui:define name="content">
+        <h:form enctype="multipart/form-data">
+            <div class="p-grid">
+                <div class="p-col-12">
+                    <div class="card">
+                        <h5>Datos Personales</h5>
+                    </div>
+                </div>
+
+                <div class="p-col-12">
+                    <div class="card">
+                        <h6></h6>
+                        <div class="ui-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-12 p-md-4">
+
+                                <p:panelGrid columns="1" style= "width: 100%; justify-content:center; align-items:center; display: flex">
+                                    <!-- comment  <h:graphicImage  value="data:image/png;base64,# {actualizarUserController.cli.logo}" alt="imagen"/>
+                                   
+                                    -->
+                                    <img id="imagen" src= "data:image/png;base64,#{usuarioController.cli.logo64}" alt="Imagen cargada"  width="335" height="168" /> 
+
+                                    <h:inputFile id="fileInput" rendered="true" value="#{usuarioController}" onchange="mostrarImagen(event)"/>
+                                </p:panelGrid>         
+                                <!-- <p:graphicImage name="# {pato.png}" width="250px"/>-->
+                                <p:outputLabel  for= "identificacion" value="Identificacion"  />
+
+                                <p:inputText id="identificacion"  value="#{usuarioController.cli.identification}"/>
+
+                            </div>
+
+                            <div class="p-field p-col-12 p-md-12">                  
+                            </div>
+
+                            <div class="p-field p-col-12 p-md-4">
+                                <p:outputLabel for="nombre1" value="Nombre" />
+                                <p:inputText id="nombre1" value="#{usuarioController.cli.nombres}" />
+                                
+                            </div> 
+
+                            <div class="p-field p-col-12 p-md-4">
+                                <p:outputLabel for="apellido" value="Apellido" />
+                                <p:inputText id="apellido" value="#{usuarioController.cli.apellidos}" />
+                                 </div> 
+                    
+                           
+
+                            <div class="p-field p-col-12 p-md-4">
+                                <p:outputLabel for="correo" value="Correo Electronico" />
+                                <p:inputText id="correo" value="#{usuarioController.cli.emailCliente}" />
+                               
+                            </div>
+
+                            <div class="p-field p-col-12 p-md-12">                  
+                            </div> 
+
+                            <div class="p-field p-col-12 p-md-4" for="seleccionar">
+                                <p:outputLabel  value=" Ciudad"  />
+
+                                <p:selectOneMenu id="seleccionar" value="#{usuarioController.cli.ciudad}">
+
+                                    <f:selectItems value="#{usuarioController.cli.ciudades}" />
+                                    <p:ajax event="change" process="@this" update="seleccionar" listener="#{usuarioController.cli.items()}" />
+                                </p:selectOneMenu>
+
+                            </div>                        
+
+                            <div class="p-field p-col-12 p-md-4">
+                                <p:outputLabel for="telefono" value="Telefono" />
+                                <p:inputText id="telefono" value="#{usuarioController.cli.telefono}" />
+                            </div>
+
+                            <div class="p-field p-col-12 p-md-13">
+                            </div>
+                        </div>
+
+                        <p:tabView>
+                            <p:tab title="Firma">
+                                <div class="ui-fluid p-formgrid p-grid">
+                                    <div class="p-field p-col-12 p-md-13">
+                                    </div> 
+                                    <div class="p-field p-col-12 p-md-4">
+                                        <p:outputLabel for="clave" value="  " />
+                                        <p:inputText id="clave" value="#{usuarioController.cli.clave}" placeholder="Clave" />
+                                    </div>
+
+                                    <p:toolbarGroup>
+
+                                        <div class="p-field p-col-12 p-md-13">
+                                        </div> 
+
+
+                                        <!-- <p:graphicImage name="# {pato.png}" width="250px"/>-->
+
+                                        <div class="p-md-12 "  style="display: flex; justify-content: center; align-items:  center;"> 
+                                            <p:fileUpload  mode="simple" />
+                                        </div> 
+
+                                        <div class="p-md-12 "  style="display: flex; justify-content: center; align-items:  center;"> 
+                                            <p:commandButton style="width:15%; color: white" value="Subir Firma"  
+                                                             ajax="false" styleClass="ui-button-warning" />
+                                        </div>   
+                                    </p:toolbarGroup>
+                                </div>
+                            </p:tab> 
+                        </p:tabView> 
+
+                        <p:tabView>
+                            <p:tab>
+                                <div class="p-md-12 "  style="display: flex; justify-content: center; align-items:  center;">
+                                    <p:commandButton style="width:15%; color: white" value="Guardar" icon="pi pi-save" 
+                                                     styleClass="ui-button-help p-mr-2  " action="#{usuarioController.guardarUsuario()}" process="@this">
+                                         <p:ajax process="@form" event="click" />
+                                    </p:commandButton>
+                                    
+                                    
+                                </div>
+                            </p:tab> 
+                        </p:tabView> 
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition> 

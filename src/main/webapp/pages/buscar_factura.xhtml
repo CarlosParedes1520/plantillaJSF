@@ -1,0 +1,92 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Buscar Facturas</ui:define>
+
+    <ui:define name="viewname">
+        <li>Contfiables</li>
+        <li><i class="pi pi-chevron-right"></i></li>
+        <li>
+            <p:link outcome="/pages/buscar_factura">Buscar Facturas</p:link>
+        </li>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <div class="p-col-12">
+                <div class="card">
+                    <h5>Busqueda</h5>
+                    <div class="ui-fluid p-formgrid p-grid " style="">
+                        <div class="p-md-12 "  style="display: flex; justify-content: center; align-items:  center;">
+                            <p:commandButton style="width:15%; color: white" value="Filtrar" styleClass="ui-button-warning" actionListener="#{facturacionController.guardarPersona()}" />
+                        </div>
+                    </div> 
+                    <div class="ui-fluid p-formgrid p-grid">
+                        <div class="p-field p-col-12 p-md-6">
+                            <p:outputLabel for="@next" styleClass="p-d-block" value="Fecha inicial"/>
+                            <p:datePicker showIcon="true" required="true"/>
+                        </div>
+                        <div class="p-field p-col-12 p-md-6">
+                            <p:outputLabel for="@next" styleClass="p-d-block" value="Fecha final"/>
+                            <p:datePicker showIcon="true" required="true"/>
+                        </div>
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-12 ">
+                        <style>
+                            table,th,td{
+                                border:2px solid white;
+                                border-collapse: collapse;
+                            }
+                        </style>
+                        <div class="p-field p-col-12 ">
+                            <table style="width: 100%"   >
+                                <tr >
+                                    <th style="text-align: center">Precio</th>
+                                    <th style="text-align: center">nombres</th>
+                                    <th style="text-align: center">compras</th>
+                                    <th style="text-align: center">ver</th>
+                                    <th style="text-align: center">eliminar.</th>
+
+                                </tr> 
+                                <tr>
+                                    <td style="text-align: center">"$123"</td>
+                                    <td style="text-align: center">"Carlos Paredes"</td>
+                                    <td style="text-align: center">"$354"</td>
+                                    <td style="text-align: center">
+                                        <p:commandButton icon="pi pi-file-pdf" process="@this" action="#{facturacionControllerModal.abrirDialogo}" styleClass="ui-button-secondary"/>
+                                        <p:dialog id="miDialogo" header="Mi Diálogo" widgetVar="dlg" modal="true" dynamic="true">
+                                            <h2>Compartir Informacion</h2>
+                                            <p>Elija una opcion</p>
+                                            <div class="p-col-12">
+                                                <p:commandButton value="Correo" process="@this" style="margin-right: 2px " action="#{facturacionControllerModal.abrirDialogoSecundario()}"  />
+                                                <p:commandButton value="ver PDF" style="margin-right: 2px " />
+                                                <p:commandButton value="Cancelar" process="@this" style="margin-right: 2px " styleClass="ui-button-danger" action="#{facturacionControllerModal.cerrarDialogo()}" />
+                                            </div>
+                                        </p:dialog>
+                                        <p:dialog id="miDialogoSecundario" header="Diálogo Secundario" widgetVar="dlgSecundario" modal="true" dynamic="true">
+                                            <h2>Enviar a Correo Electronico</h2>
+                                            <div  style="display: flex; justify-content: center; align-items:  center; margin-bottom: 2%">
+
+                                                <p:inputText placeholder="Ingrese su correo..."  style="width: 90%"/>
+                                            </div>
+                                            <p:commandButton value="Enviar Correo" process="@this"  style="margin-right: 2px ; " />
+
+                                            <p:commandButton value="cerrar" process="@this"  style="margin-right: 2px " styleClass="ui-button-danger" action="#{facturacionControllerModal.cerrarDialogoSecundario()}" /> 
+                                        </p:dialog>
+                                    </td>
+                                    <td style="text-align: center"><p:commandButton icon="pi pi-trash" styleClass="ui-button-danger" /></td>
+                                </tr>        
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

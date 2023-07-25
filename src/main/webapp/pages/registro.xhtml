@@ -1,0 +1,73 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" xmlns:po="http://primefaces.org/rain" template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Registro</ui:define>
+    <ui:define name="viewname">
+        <li>Contfiables</li>
+        <li><i class="pi pi-chevron-right"></i></li>
+        <li>
+            <p:link outcome="/pages/registro">registro</p:link>  
+        </li>
+
+        <!-- En esta parte intente colocar el dialog box el cuañ me permita sacar el formulario y la funcion guardar -->
+
+    </ui:define>
+
+    <ui:define name="head">
+
+    </ui:define>
+
+    <ui:define name="content">
+
+
+
+        <div class="card">
+            <h5>Registro</h5>
+            <p:commandButton value="Registro" type="button" icon="pi pi-external-link" onclick="PF('dlg1').show()"/> 
+            <h5>Firma electronica</h5>
+            <p:commandButton value="firma" type="button" icon="pi pi-external-link" onclick="PF('firm').show()"/> 
+        </div>
+        <p:dialog header="Formulario de registro" widgetVar="dlg1" minHeight="40" width="350" showEffect="fade">
+            <div class="p-field ">
+                <p:outputLabel for="name1">Nombre:</p:outputLabel>
+                <p:inputText id="name1"  />
+            </div>
+            <div class="p-field ">
+                <p:outputLabel for="apelli">Apellido:</p:outputLabel>
+                <p:inputText id="apelli" />
+            </div>
+            <div class="p-field  ">
+                <p:outputLabel for="telefono">Telefono:</p:outputLabel>
+                <p:inputText id="telefono"  />
+            </div>
+            <div class="p-field ">
+                <p:outputLabel for="email1">Email:  </p:outputLabel>
+                <p:inputText id="email1" />
+            </div>
+            <div class="card">
+                <div class="ui-button-group">
+                    <p:button icon="pi pi-check" value="Guardar"/>
+                    <p:button icon="pi pi-times" value="Cancelar"/>
+                </div>
+            </div>
+        </p:dialog>
+        <p:dialog header="Ingrese la firma electronica" widgetVar="firm" minHeight="40" width="350" showEffect="fade" modal="true">
+            <div class="p-formgroup-inline">
+                 <p class="m-0">Subir archivo: </p>
+                <p:commandButton type="button" value="Subir"/>
+                  <div class="p-field ">
+                <p:outputLabel for="clave">Clave  </p:outputLabel>
+                <p:inputText id="clave" />
+            </div>
+                            </div>
+
+               <div class="card">
+                <div class="ui-button-group">
+                    <p:button icon="pi pi-check" value="Aceptar"/>
+                    <p:button icon="pi pi-times" value="Cancelar"/>
+                </div> 
+            </div>
+        </p:dialog>       
+    </ui:define>
+</ui:composition>
